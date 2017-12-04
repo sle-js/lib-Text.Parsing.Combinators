@@ -85,8 +85,12 @@ const sepBy1 = parser => sep => lexer => {
 };
 
 
+const chainl1 = parser => sep =>
+    sepBy1(parser)(sep);
+
+
 const chainl1Map = parser => sep => f =>
-    map(sepBy1(parser)(sep))(f);
+    map(chainl1(parser)(sep))(f);
 
 
 const condition = errorFn => f => lexer =>
@@ -133,6 +137,7 @@ module.exports = {
     backtrack,
     condition,
     sepBy1,
+    chainl1,
     chainl1Map,
     many,
     map,
