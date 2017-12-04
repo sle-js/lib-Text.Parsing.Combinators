@@ -131,6 +131,7 @@ module.exports = {
     and,
     andMap,
     backtrack,
+    condition,
     sepBy1,
     chainl1Map,
     many,
