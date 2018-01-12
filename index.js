@@ -59,6 +59,14 @@ const many = parser => lexer =>
     manyResult(okayResult(lexer)([]))(parser);
 
 
+const many1 = parser =>
+    andMap([parser, many(parser)])(r => Array.prepend(r[0])(r[1]));
+
+
+const many1Map = parser =>
+    map(many1(parser));
+
+
 const or = errorFn => parsers => lexer => {
     const parseOption = parser => {
         const optionResult = parser(lexer);
@@ -140,6 +148,8 @@ module.exports = {
     chainl1,
     chainl1Map,
     many,
+    many1,
+    many1Map,
     map,
     optional,
     optionalMap,
